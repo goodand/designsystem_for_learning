@@ -1,0 +1,31 @@
+/* ============================================
+   Domain Profile: Text Similarity
+
+   This overrides the configurable Topic Mode
+   slots with Text Similarity domain values.
+
+   Usage:
+     <div data-domain="text-similarity"> ... </div>
+   or:
+     <div class="domain-text-similarity"> ... </div>
+   ============================================ */
+
+[data-domain="text-similarity"],
+.domain-text-similarity {
+  --topic-slot-count: 3;
+  --topic-1-color: var(--color-blue-9);
+  --topic-1-bg: var(--color-blue-2);
+  --topic-1-label: "Lexical";
+  --topic-2-color: var(--color-violet-9);
+  --topic-2-bg: var(--color-violet-2);
+  --topic-2-label: "Semantic";
+  --topic-3-color: var(--color-teal-9);
+  --topic-3-bg: var(--color-teal-2);
+  --topic-3-label: "Hybrid";
+  --topic-4-color: var(--color-amber-9);
+  --topic-4-bg: var(--color-amber-2);
+  --topic-4-label: "";
+  --topic-5-color: var(--color-green-9);
+  --topic-5-bg: var(--color-green-2);
+  --topic-5-label: "";
+}

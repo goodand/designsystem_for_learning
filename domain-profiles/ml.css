@@ -1,0 +1,28 @@
+/* ============================================
+   Domain Profile: Machine Learning
+
+   Overrides Topic Mode slots for ML taxonomy.
+
+   Usage:
+     <div data-domain="ml"> ... </div>
+   ============================================ */
+
+[data-domain="ml"],
+.domain-ml {
+  --topic-slot-count: 5;
+  --topic-1-color: var(--color-violet-9);
+  --topic-1-bg: var(--color-violet-2);
+  --topic-1-label: "Supervised";
+  --topic-2-color: var(--color-teal-9);
+  --topic-2-bg: var(--color-teal-2);
+  --topic-2-label: "Unsupervised";
+  --topic-3-color: var(--color-amber-9);
+  --topic-3-bg: var(--color-amber-2);
+  --topic-3-label: "Reinforcement";
+  --topic-4-color: var(--color-red-9);
+  --topic-4-bg: var(--color-red-2);
+  --topic-4-label: "Evaluation";
+  --topic-5-color: var(--color-blue-9);
+  --topic-5-bg: var(--color-blue-2);
+  --topic-5-label: "Preprocessing";
+}

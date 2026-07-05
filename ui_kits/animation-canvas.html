@@ -1,0 +1,167 @@
+<!-- @dsCard group="Animation UI" viewport="700x400" name="Animation Canvas" subtitle="Dark canvas with coordinate system, vectors, and matrix" -->
+<!-- @visual-strategy
+     router:   strategy/router.md
+     layers:   strategy/design_system.md
+     policies: strategy/ux_policy.md, strategy/scene_object_policy.md, strategy/five_unit_frame.md
+     formats:  strategy/visual_formats/xy_coordinate.md, strategy/visual_formats/matrix.md, strategy/visual_formats/formula_comparison.md
+-->
+<link rel="stylesheet" href="../styles.css">
+<link rel="visual-strategy" href="../strategy/router.md">
+<link rel="visual-strategy-format" href="../strategy/visual_formats/xy_coordinate.md">
+<link rel="visual-strategy-format" href="../strategy/visual_formats/matrix.md">
+<link rel="stylesheet" href="../domain-profiles/text-similarity.css">
+<script src="../_ds_bundle.js"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  body { margin: 0; padding: 0; font-family: var(--font-sans); background: #0F1110; overflow: hidden; }
+</style>
+<div id="root"></div>
+<script type="text/babel">
+  const { Tag, Badge } = window.MLAnimationsDesignSystem_947957 || {};
+
+  function AnimCanvas() {
+    const canvasStyle = {
+      width: '100%', height: '400px', position: 'relative', overflow: 'hidden',
+      background: '#0F1110',
+    };
+
+    const titleStyle = {
+      position: 'absolute', top: 16, left: 20,
+      color: '#E1E7E3', fontFamily: 'var(--font-sans)',
+      fontSize: 'var(--font-size-xl)', fontWeight: 'var(--font-weight-bold)',
+      letterSpacing: 'var(--letter-spacing-tight)',
+    };
+
+    const subtitleStyle = {
+      position: 'absolute', top: 44, left: 20,
+      color: '#8B9792', fontFamily: 'var(--font-sans)',
+      fontSize: 'var(--font-size-sm)',
+    };
+
+    const topicBar = {
+      position: 'absolute', top: 16, right: 16,
+      display: 'flex', gap: '6px',
+    };
+
+    // XY coordinate system
+    const axisArea = {
+      position: 'absolute', left: 60, top: 80, width: 280, height: 280,
+    };
+
+    // Matrix area
+    const matrixArea = {
+      position: 'absolute', right: 30, top: 100, width: 280,
+    };
+
+    const gridLines = [];
+    for (let i = 0; i <= 5; i++) {
+      gridLines.push(
+        <line key={`h${i}`} x1="0" y1={i * 50} x2="250" y2={i * 50} stroke="rgba(255,255,255,0.06)" strokeWidth="1" />,
+        <line key={`v${i}`} x1={i * 50} y1="0" x2={i * 50} y2="250" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+      );
+    }
+
+    const matrixData = [
+      ['', 'toy', 'family', 'love', 'game'],
+      ['Doc A', '0.42', '0.87', '0.12', '0.03'],
+      ['Doc B', '0.15', '0.23', '0.91', '0.67'],
+      ['Doc C', '0.88', '0.04', '0.31', '0.55'],
+    ];
+
+    return (
+      <div style={canvasStyle}>
+        <div style={titleStyle}>TF-IDF 코사인 유사도</div>
+        <div style={subtitleStyle}>두 문서 벡터의 방향 유사도를 측정합니다</div>
+
+        <div style={topicBar} data-domain="text-similarity">
+          {Tag && <Tag tone="info">Lexical</Tag>}
+          {Tag && <Tag tone="brand">Semantic</Tag>}
+          {!Tag && <span style={{padding:'4px 12px',borderRadius:9999,background:'var(--color-violet-9)',color:'white',fontSize:12,fontWeight:500}}>Semantic</span>}
+        </div>
+
+        {/* XY Coordinate */}
+        <div style={axisArea}>
+          <svg width="280" height="280" viewBox="-15 -15 280 280">
+            {gridLines}
+            {/* Axes */}
+            <line x1="0" y1="250" x2="260" y2="250" stroke="#5D727D" strokeWidth="1.5" markerEnd="url(#arrow)" />
+            <line x1="0" y1="250" x2="0" y2="-10" stroke="#5D727D" strokeWidth="1.5" markerEnd="url(#arrow)" />
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                <path d="M0,0 L8,3 L0,6" fill="#5D727D" />
+              </marker>
+            </defs>
+            {/* Axis labels */}
+            <text x="255" y="270" fill="#8B9792" fontSize="11" fontFamily="var(--font-mono)">toy</text>
+            <text x="-12" y="-5" fill="#8B9792" fontSize="11" fontFamily="var(--font-mono)" textAnchor="end">family</text>
+
+            {/* Vector A */}
+            <line x1="0" y1="250" x2="105" y2="32" stroke="var(--color-violet-8)" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="105" cy="32" r="4" fill="var(--color-violet-8)" />
+            <text x="112" y="30" fill="var(--color-violet-7)" fontSize="11" fontFamily="var(--font-sans)" fontWeight="500">Doc A</text>
+
+            {/* Vector B */}
+            <line x1="0" y1="250" x2="190" y2="82" stroke="var(--color-teal-8)" strokeWidth="2" strokeLinecap="round" />
+            <circle cx="190" cy="82" r="4" fill="var(--color-teal-8)" />
+            <text x="197" y="80" fill="var(--color-teal-7)" fontSize="11" fontFamily="var(--font-sans)" fontWeight="500">Doc B</text>
+
+            {/* Angle arc */}
+            <path d="M 30,238 A 25,25 0 0,0 20,228" fill="none" stroke="var(--color-amber-7)" strokeWidth="1.5" strokeDasharray="3,2" />
+            <text x="38" y="225" fill="var(--color-amber-8)" fontSize="10" fontFamily="var(--font-mono)">θ</text>
+          </svg>
+        </div>
+
+        {/* Matrix */}
+        <div style={matrixArea}>
+          <div style={{fontSize:11, color:'#8B9792', marginBottom:8, fontWeight:600, fontFamily:'var(--font-sans)'}}>
+            TF-IDF Matrix
+          </div>
+          <table style={{borderCollapse:'collapse', width:'100%'}}>
+            <tbody>
+              {matrixData.map((row, i) => (
+                <tr key={i}>
+                  {row.map((cell, j) => (
+                    <td key={j} style={{
+                      padding: '6px 10px',
+                      fontSize: i === 0 || j === 0 ? '10px' : '12px',
+                      fontFamily: i === 0 || j === 0 ? 'var(--font-sans)' : 'var(--font-mono)',
+                      fontWeight: i === 0 || j === 0 ? 600 : 400,
+                      color: i === 0 || j === 0 ? '#8B9792' : '#C7D1CB',
+                      background: i === 0 || j === 0 ? 'transparent' : 'rgba(255,255,255,0.03)',
+                      borderBottom: '1px solid rgba(255,255,255,0.06)',
+                      textAlign: j === 0 ? 'left' : 'right',
+                    }}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Formula */}
+        <div style={{
+          position: 'absolute', bottom: 20, left: 20, right: 20,
+          display: 'flex', alignItems: 'center', gap: 16,
+          padding: '10px 16px',
+          background: 'rgba(255,255,255,0.04)',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid rgba(255,255,255,0.06)',
+        }}>
+          <span style={{fontSize:11, color:'#8B9792', fontWeight:600, flexShrink:0}}>Cosine Similarity</span>
+          <span style={{fontFamily:'var(--font-mono)', fontSize:14, color:'var(--color-violet-7)'}}>
+            cos(θ) = (A · B) / (‖A‖ × ‖B‖)
+          </span>
+          <span style={{marginLeft:'auto', fontFamily:'var(--font-mono)', fontSize:14, color:'var(--color-teal-9)', fontWeight:600}}>
+            = 0.847
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  ReactDOM.render(<AnimCanvas />, document.getElementById('root'));
+</script>

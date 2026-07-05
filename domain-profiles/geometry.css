@@ -1,0 +1,28 @@
+/* ============================================
+   Domain Profile: Geometry
+
+   Overrides Topic Mode slots for geometric concepts.
+
+   Usage:
+     <div data-domain="geometry"> ... </div>
+   ============================================ */
+
+[data-domain="geometry"],
+.domain-geometry {
+  --topic-slot-count: 5;
+  --topic-1-color: var(--color-violet-9);
+  --topic-1-bg: var(--color-violet-2);
+  --topic-1-label: "Vector";
+  --topic-2-color: var(--color-teal-9);
+  --topic-2-bg: var(--color-teal-2);
+  --topic-2-label: "Distance";
+  --topic-3-color: var(--color-amber-9);
+  --topic-3-bg: var(--color-amber-2);
+  --topic-3-label: "Angle";
+  --topic-4-color: var(--color-blue-9);
+  --topic-4-bg: var(--color-blue-2);
+  --topic-4-label: "Projection";
+  --topic-5-color: var(--color-green-9);
+  --topic-5-bg: var(--color-green-2);
+  --topic-5-label: "Transformation";
+}
