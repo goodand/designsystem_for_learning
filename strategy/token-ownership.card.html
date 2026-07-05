@@ -1,0 +1,27 @@
+<!-- @dsCard group="Strategy" viewport="700x320" name="Token Ownership" subtitle="Each visual channel belongs to exactly one Mode — color = Topic only" -->
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { margin: 0; padding: 16px 20px; font-family: var(--font-sans); background: var(--color-white); color: var(--color-slate-12); }
+  table { border-collapse: collapse; width: 100%; }
+  th { text-align: left; font-size: 9px; font-weight: 700; color: var(--color-slate-7); text-transform: uppercase; letter-spacing: 0.05em; padding: 5px 8px; border-bottom: 1.5px solid var(--color-slate-3); }
+  td { font-size: 10.5px; color: var(--color-slate-11); padding: 6px 8px; border-bottom: 1px solid var(--color-slate-2); vertical-align: top; }
+  .mode { font-weight: 700; color: var(--color-slate-12); white-space: nowrap; }
+  .prefix { font-family: var(--font-mono); font-size: 9.5px; color: var(--color-violet-10); }
+  .no { font-size: 9px; color: var(--color-red-11); font-weight: 600; }
+  .yes { font-size: 9px; color: var(--color-green-11); font-weight: 600; }
+  .note { margin-top: 10px; font-size: 10px; color: var(--color-slate-9); line-height: 1.5; padding: 8px 12px; background: var(--color-slate-1); border-radius: var(--radius-md); border-left: 3px solid var(--color-violet-8); }
+</style>
+<table>
+  <thead><tr><th style="width:15%">Mode</th><th style="width:50%">Owns (channel → token)</th><th>Color?</th></tr></thead>
+  <tbody>
+    <tr><td class="mode">Relation</td><td>배치·거리·경계·bracket·Venn·선 스타일 <span class="prefix">--relation-*</span></td><td><span class="no">✗ no color</span></td></tr>
+    <tr><td class="mode">Process</td><td>위치·화살표·순서·타이밍·단계 번호·흐름선 <span class="prefix">--process-*</span></td><td><span class="no">✗ no color</span></td></tr>
+    <tr><td class="mode">Abstraction</td><td>scale·zoom·block open/close·depth label <span class="prefix">--abstraction-*</span></td><td><span class="no">✗ no opacity/color</span></td></tr>
+    <tr><td class="mode">Disclosure</td><td>open/collapsed/hidden/focus·중앙 배치·명도·테두리·state bar <span class="prefix">--disclosure-*</span></td><td><span class="yes">△ opacity here</span></td></tr>
+    <tr><td class="mode">Representation</td><td>5슬롯 레이아웃·고정 위치·라벨·작은 아이콘 <span class="prefix">--repr-*</span></td><td><span class="no">✗ no shape/color</span></td></tr>
+    <tr><td class="mode">Topic / Domain</td><td>COLOR (the only color-owning axis) <span class="prefix">--topic-*</span> + domain-profiles/</td><td><span class="yes">✓ color</span></td></tr>
+  </tbody>
+</table>
+<div class="note">
+  하나의 token은 하나의 Mode에만 소속된다. <strong>색상은 Topic/Domain Profile 전용</strong> — Relation·Process·Representation·Abstraction에 색 의미를 배정하지 않는다. 구조적 의미는 위치·선·경계·레이아웃·화살표·zoom·open/collapsed로 표현한다. <strong>명도(opacity)는 Disclosure의 보조 채널</strong>이며 최소로만 쓴다(흐리게보다 hidden/collapsed/open 선호).
+</div>
